@@ -752,6 +752,7 @@ h4 {
     box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.3);
 }
 
+
 .bold-link {
     font-weight: 900;
     text-decoration: underline!important;
@@ -762,7 +763,8 @@ h4 {
 }
 
 .bgc-dark-slate-blue {
-    background-color: #364577;
+    background-color: #a03300;
+    margin-bottom: 80px;
 }
 
 .bgc-atomic-tangerine {
@@ -774,7 +776,8 @@ h4 {
 }
 
 .btn-atomic-tangerine {
-    background: #a03300;
+    box-shadow: white 0px 5px 20px;
+    background: #8d2c00;
     color: #FFFFFF!important;
 }
 
