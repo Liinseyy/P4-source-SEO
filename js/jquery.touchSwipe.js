@@ -1,1 +1,532 @@
-!function(a){"function"==typeof define&&define.amd&&define.amd.jQuery?define(["jquery"],a):a("undefined"!=typeof module&&module.exports?require("jquery"):jQuery)}(function(a){"use strict";function r(b){return b&& void 0===b.allowPageScroll&&(void 0!==b.swipe|| void 0!==b.swipeStatus)&&(b.allowPageScroll=i),void 0!==b.click&& void 0===b.tap&&(b.tap=b.click),b||(b={}),b=a.extend({},a.fn.swipe.defaults,b),this.each(function(){var d=a(this),c=d.data(B);c||(c=new s(this,b),d.data(B,c))})}function s(F,s){function G(d){if(!(aj()||a(d.target).closest(s.excludedElements,E).length>0)){var b=d.originalEvent?d.originalEvent:d;if(!b.pointerType||"mouse"!=b.pointerType||0!=s.fallbackToMouseEvents){var e,c=b.touches,f=c?c[0]:b;return aP=n,c?aQ=c.length:!1!==s.preventDefaultEvents&&d.preventDefault(),aF=0,aG=null,aH=null,aN=null,aI=0,aJ=0,aK=0,aL=1,aM=0,aO=aq(),ah(),al(0,f),!c||aQ===s.fingers||s.fingers===m||U()?(aS=ay(),2==aQ&&(al(1,c[1]),aJ=aK=at(aR[0].start,aR[1].start)),(s.swipeStatus||s.pinchStatus)&&(e=N(b,aP))):e=!1,!1===e?(N(b,aP=q),e):(s.hold&&(aY=setTimeout(a.proxy(function(){E.trigger("hold",[b.target]),s.hold&&(e=s.hold.call(E,b,b.target))},this),s.longTapThreshold)),ak(!0),null)}}}function I(d){var c=d.originalEvent?d.originalEvent:d;if(aP!==p&&aP!==q&&!ai()){var f,a=c.touches,g=a?a[0]:c,b=am(g);if(aT=ay(),a&&(aQ=a.length),s.hold&&clearTimeout(aY),aP=o,2==aQ&&(0==aJ?(al(1,a[1]),aJ=aK=at(aR[0].start,aR[1].start)):(am(a[1]),aK=at(aR[0].end,aR[1].end),aN=av(aR[0].end,aR[1].end)),aL=au(aJ,aK),aM=Math.abs(aJ-aK)),aQ===s.fingers||s.fingers===m||!a||U()){if(aG=ax(b.start,b.end),aH=ax(b.last,b.end),S(d,aH),aF=aw(b.start,b.end),aI=as(),ao(aG,aF),f=N(c,aP),!s.triggerOnTouchEnd||s.triggerOnTouchLeave){var e=!0;if(s.triggerOnTouchLeave){var h=az(this);e=aA(b.end,h)}!s.triggerOnTouchEnd&&e?aP=M(o):s.triggerOnTouchLeave&&!e&&(aP=M(p)),aP!=q&&aP!=p||N(c,aP)}}else N(c,aP=q);!1===f&&N(c,aP=q)}}function J(b){var a=b.originalEvent?b.originalEvent:b,c=a.touches;if(c){if(c.length&&!ai())return ag(a),!0;if(c.length&&ai())return!0}return ai()&&(aQ=aV),aT=ay(),aI=as(),Q()||!P()?N(a,aP=q):s.triggerOnTouchEnd|| !1===s.triggerOnTouchEnd&&aP===o?(!1!==s.preventDefaultEvents&& !1!==b.cancelable&&b.preventDefault(),N(a,aP=p)):!s.triggerOnTouchEnd&&_()?O(a,aP=p,v):aP===o&&N(a,aP=q),ak(!1),null}function H(){aQ=0,aT=0,aS=0,aJ=0,aK=0,aL=1,ah(),ak(!1)}function K(a){var b=a.originalEvent?a.originalEvent:a;s.triggerOnTouchLeave&&N(b,aP=M(p))}function L(){E.unbind(C,G),E.unbind(D,H),E.unbind(aC,I),E.unbind(aD,J),aE&&E.unbind(aE,K),ak(!1)}function M(b){var a=b,d=R(),c=P(),e=Q();return!d||e?a=q:c&&b==o&&(!s.triggerOnTouchEnd||s.triggerOnTouchLeave)?a=p:!c&&b==p&&s.triggerOnTouchLeave&&(a=q),a}function N(b,c){var a,d=b.touches;return(Y()||X())&&(a=O(b,c,t)),(V()||U())&& !1!==a&&(a=O(b,c,u)),ae()&& !1!==a?a=O(b,c,w):af()&& !1!==a?a=O(b,c,x):ad()&& !1!==a&&(a=O(b,c,v)),c===q&&H(b),c===p&&(d&&d.length||H(b)),a}function O(b,j,k){var i;if(k==t){if(E.trigger("swipeStatus",[j,aG||null,aF||0,aI||0,aQ,aR,aH]),s.swipeStatus&& !1===(i=s.swipeStatus.call(E,b,j,aG||null,aF||0,aI||0,aQ,aR,aH)))return!1;if(j==p&&W()){if(clearTimeout(aX),clearTimeout(aY),E.trigger("swipe",[aG,aF,aI,aQ,aR,aH]),s.swipe&& !1===(i=s.swipe.call(E,b,aG,aF,aI,aQ,aR,aH)))return!1;switch(aG){case c:E.trigger("swipeLeft",[aG,aF,aI,aQ,aR,aH]),s.swipeLeft&&(i=s.swipeLeft.call(E,b,aG,aF,aI,aQ,aR,aH));break;case d:E.trigger("swipeRight",[aG,aF,aI,aQ,aR,aH]),s.swipeRight&&(i=s.swipeRight.call(E,b,aG,aF,aI,aQ,aR,aH));break;case e:E.trigger("swipeUp",[aG,aF,aI,aQ,aR,aH]),s.swipeUp&&(i=s.swipeUp.call(E,b,aG,aF,aI,aQ,aR,aH));break;case f:E.trigger("swipeDown",[aG,aF,aI,aQ,aR,aH]),s.swipeDown&&(i=s.swipeDown.call(E,b,aG,aF,aI,aQ,aR,aH))}}}if(k==u){if(E.trigger("pinchStatus",[j,aN||null,aM||0,aI||0,aQ,aL,aR]),s.pinchStatus&& !1===(i=s.pinchStatus.call(E,b,j,aN||null,aM||0,aI||0,aQ,aL,aR)))return!1;if(j==p&&T())switch(aN){case g:E.trigger("pinchIn",[aN||null,aM||0,aI||0,aQ,aL,aR]),s.pinchIn&&(i=s.pinchIn.call(E,b,aN||null,aM||0,aI||0,aQ,aL,aR));break;case h:E.trigger("pinchOut",[aN||null,aM||0,aI||0,aQ,aL,aR]),s.pinchOut&&(i=s.pinchOut.call(E,b,aN||null,aM||0,aI||0,aQ,aL,aR))}}return k==v?j!==q&&j!==p||(clearTimeout(aX),clearTimeout(aY),aa()&&!ac()?(aW=ay(),aX=setTimeout(a.proxy(function(){aW=null,E.trigger("tap",[b.target]),s.tap&&(i=s.tap.call(E,b,b.target))},this),s.doubleTapThreshold)):(aW=null,E.trigger("tap",[b.target]),s.tap&&(i=s.tap.call(E,b,b.target)))):k==w?j!==q&&j!==p||(clearTimeout(aX),clearTimeout(aY),aW=null,E.trigger("doubletap",[b.target]),s.doubleTap&&(i=s.doubleTap.call(E,b,b.target))):k==x&&(j!==q&&j!==p||(clearTimeout(aX),aW=null,E.trigger("longtap",[b.target]),s.longTap&&(i=s.longTap.call(E,b,b.target)))),i}function P(){var a=!0;return null!==s.threshold&&(a=aF>=s.threshold),a}function Q(){var a=!1;return null!==s.cancelThreshold&&null!==aG&&(a=ap(aG)-aF>=s.cancelThreshold),a}function R(){return!s.maxTimeThreshold||!(aI>=s.maxTimeThreshold)}function S(b,g){if(!1!==s.preventDefaultEvents){if(s.allowPageScroll===i)b.preventDefault();else{var a=s.allowPageScroll===j;switch(g){case c:(s.swipeLeft&&a|| !a&&s.allowPageScroll!=k)&&b.preventDefault();break;case d:(s.swipeRight&&a|| !a&&s.allowPageScroll!=k)&&b.preventDefault();break;case e:(s.swipeUp&&a|| !a&&s.allowPageScroll!=l)&&b.preventDefault();break;case f:(s.swipeDown&&a|| !a&&s.allowPageScroll!=l)&&b.preventDefault()}}}}function T(){var a=Z(),b=$(),c=null===s.pinchThreshold||aM>=s.pinchThreshold;return a&&b&&c}function U(){return!!(s.pinchStatus||s.pinchIn||s.pinchOut)}function V(){return!(!T()||!U())}function W(){var a=R(),b=P(),c=Z(),d=$();return!Q()&&d&&c&&b&&a}function X(){return!!(s.swipe||s.swipeStatus||s.swipeLeft||s.swipeRight||s.swipeUp||s.swipeDown)}function Y(){return!(!W()||!X())}function Z(){return aQ===s.fingers||s.fingers===m||!b}function $(){return 0!==aR[0].end.x}function _(){return!!s.tap}function aa(){return!!s.doubleTap}function ab(){if(null==aW)return!1;var a=ay();return aa()&&a-aW<=s.doubleTapThreshold}function ac(){return ab()}function ad(){return!(!((1===aQ||!b)&&(isNaN(aF)||aF<s.threshold))||!_())}function ae(){return!(!ab()||!aa())}function af(){return!(!(aI>s.longTapThreshold&&aF<y)||!s.longTap)}function ag(a){aU=ay(),aV=a.touches.length+1}function ah(){aU=0,aV=0}function ai(){var a=!1;return aU&&ay()-aU<=s.fingerReleaseThreshold&&(a=!0),a}function aj(){return!(!0!==E.data(B+"_intouch"))}function ak(a){E&&(!0===a?(E.bind(aC,I),E.bind(aD,J),aE&&E.bind(aE,K)):(E.unbind(aC,I,!1),E.unbind(aD,J,!1),aE&&E.unbind(aE,K,!1)),E.data(B+"_intouch",!0===a))}function al(c,b){var a={start:{x:0,y:0},last:{x:0,y:0},end:{x:0,y:0}};return a.start.x=a.last.x=a.end.x=b.pageX||b.clientX,a.start.y=a.last.y=a.end.y=b.pageY||b.clientY,aR[c]=a,a}function am(b){var c=void 0!==b.identifier?b.identifier:0,a=an(c);return null===a&&(a=al(c,b)),a.last.x=a.end.x,a.last.y=a.end.y,a.end.x=b.pageX||b.clientX,a.end.y=b.pageY||b.clientY,a}function an(a){return aR[a]||null}function ao(a,b){a!=i&&(b=Math.max(b,ap(a)),aO[a].distance=b)}function ap(a){if(aO[a])return aO[a].distance}function aq(){var a={};return a[c]=ar(c),a[d]=ar(d),a[e]=ar(e),a[f]=ar(f),a}function ar(a){return{direction:a,distance:0}}function as(){return aT-aS}function at(a,b){var c=Math.abs(a.x-b.x),d=Math.abs(a.y-b.y);return Math.round(Math.sqrt(c*c+d*d))}function au(a,b){return(b/a*1).toFixed(2)}function av(){return aL<1?h:g}function aw(a,b){return Math.round(Math.sqrt(Math.pow(b.x-a.x,2)+Math.pow(b.y-a.y,2)))}function ax(j,k){if(aB(j,k))return i;var g,h,l,m,n,b,a=(g=j,h=k,l=g.x-h.x,m=h.y-g.y,n=Math.atan2(m,l),b=Math.round(180*n/Math.PI),b<0&&(b=360-Math.abs(b)),b);return a<=45&&a>=0?c:a<=360&&a>=315?c:a>=135&&a<=225?d:a>45&&a<135?f:e}function ay(){return(new Date).getTime()}function az(b){var c=(b=a(b)).offset();return{left:c.left,right:c.left+b.outerWidth(),top:c.top,bottom:c.top+b.outerHeight()}}function aA(a,b){return a.x>b.left&&a.x<b.right&&a.y>b.top&&a.y<b.bottom}function aB(a,b){return a.x==b.x&&a.y==b.y}var s=a.extend({},s),r=b||A||!s.fallbackToMouseEvents,C=r?A?z?"MSPointerDown":"pointerdown":"touchstart":"mousedown",aC=r?A?z?"MSPointerMove":"pointermove":"touchmove":"mousemove",aD=r?A?z?"MSPointerUp":"pointerup":"touchend":"mouseup",aE=r?A?"mouseleave":null:"mouseleave",D=A?z?"MSPointerCancel":"pointercancel":"touchcancel",aF=0,aG=null,aH=null,aI=0,aJ=0,aK=0,aL=1,aM=0,aN=0,aO=null,E=a(F),aP="start",aQ=0,aR={},aS=0,aT=0,aU=0,aV=0,aW=0,aX=null,aY=null;try{E.bind(C,G),E.bind(D,H)}catch(aZ){a.error("events not supported "+C+","+D+" on jQuery.swipe")}this.enable=function(){return this.disable(),E.bind(C,G),E.bind(D,H),E},this.disable=function(){return L(),E},this.destroy=function(){L(),E.data(B,null),E=null},this.option=function(b,c){if("object"==typeof b)s=a.extend(s,b);else if(void 0!==s[b]){if(void 0===c)return s[b];s[b]=c}else{if(!b)return s;a.error("Option "+b+" does not exist on jQuery.swipe.options")}return null}}var c="left",d="right",e="up",f="down",g="in",h="out",i="none",j="auto",t="swipe",u="pinch",v="tap",w="doubletap",x="longtap",k="horizontal",l="vertical",m="all",y=10,n="start",o="move",p="end",q="cancel",b="ontouchstart"in window,z=window.navigator.msPointerEnabled&&!window.navigator.pointerEnabled&&!b,A=(window.navigator.pointerEnabled||window.navigator.msPointerEnabled)&&!b,B="TouchSwipe";a.fn.swipe=function(c){var d=a(this),b=d.data(B);if(b&&"string"==typeof c){if(b[c])return b[c].apply(b,Array.prototype.slice.call(arguments,1));a.error("Method "+c+" does not exist on jQuery.swipe")}else if(b&&"object"==typeof c)b.option.apply(b,arguments);else if(!(b||"object"!=typeof c&&c))return r.apply(this,arguments);return d},a.fn.swipe.version="1.6.18",a.fn.swipe.defaults={fingers:1,threshold:75,cancelThreshold:null,pinchThreshold:20,maxTimeThreshold:null,fingerReleaseThreshold:250,longTapThreshold:500,doubleTapThreshold:200,swipe:null,swipeLeft:null,swipeRight:null,swipeUp:null,swipeDown:null,swipeStatus:null,pinchIn:null,pinchOut:null,pinchStatus:null,click:null,tap:null,doubleTap:null,longTap:null,hold:null,triggerOnTouchEnd:!0,triggerOnTouchLeave:!1,allowPageScroll:"auto",fallbackToMouseEvents:!0,excludedElements:".noSwipe",preventDefaultEvents:!0},a.fn.swipe.phases={PHASE_START:n,PHASE_MOVE:o,PHASE_END:p,PHASE_CANCEL:q},a.fn.swipe.directions={LEFT:c,RIGHT:d,UP:e,DOWN:f,IN:g,OUT:h},a.fn.swipe.pageScroll={NONE:i,HORIZONTAL:k,VERTICAL:l,AUTO:j},a.fn.swipe.fingers={ONE:1,TWO:2,THREE:3,FOUR:4,FIVE:5,ALL:m}})
+/*!
+ * @fileOverview TouchSwipe - jQuery Plugin
+ * @version 1.6.18
+ *
+ * @author Matt Bryson http://www.github.com/mattbryson
+ * @see https://github.com/mattbryson/TouchSwipe-Jquery-Plugin
+ * @see http://labs.rampinteractive.co.uk/touchSwipe/
+ * @see http://plugins.jquery.com/project/touchSwipe
+ * @license
+ * Copyright (c) 2010-2015 Matt Bryson
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ *
+ */
+! function(factory) {
+    "function" == typeof define && define.amd && define.amd.jQuery ? define(["jquery"], factory) : factory("undefined" != typeof module && module.exports ? require("jquery") : jQuery)
+}(function($) {
+    "use strict";
+
+    function init(options) {
+        return !options || void 0 !== options.allowPageScroll || void 0 === options.swipe && void 0 === options.swipeStatus || (options.allowPageScroll = NONE), void 0 !== options.click && void 0 === options.tap && (options.tap = options.click), options || (options = {}), options = $.extend({}, $.fn.swipe.defaults, options), this.each(function() {
+            var $this = $(this),
+                plugin = $this.data(PLUGIN_NS);
+            plugin || (plugin = new TouchSwipe(this, options), $this.data(PLUGIN_NS, plugin))
+        })
+    }
+
+    function TouchSwipe(element, options) {
+        function touchStart(jqEvent) {
+            if (!(getTouchInProgress() || $(jqEvent.target).closest(options.excludedElements, $element).length > 0)) {
+                var event = jqEvent.originalEvent ? jqEvent.originalEvent : jqEvent;
+                if (!event.pointerType || "mouse" != event.pointerType || 0 != options.fallbackToMouseEvents) {
+                    var ret, touches = event.touches,
+                        evt = touches ? touches[0] : event;
+                    return phase = PHASE_START, touches ? fingerCount = touches.length : options.preventDefaultEvents !== !1 && jqEvent.preventDefault(), distance = 0, direction = null, currentDirection = null, pinchDirection = null, duration = 0, startTouchesDistance = 0, endTouchesDistance = 0, pinchZoom = 1, pinchDistance = 0, maximumsMap = createMaximumsData(), cancelMultiFingerRelease(), createFingerData(0, evt), !touches || fingerCount === options.fingers || options.fingers === ALL_FINGERS || hasPinches() ? (startTime = getTimeStamp(), 2 == fingerCount && (createFingerData(1, touches[1]), startTouchesDistance = endTouchesDistance = calculateTouchesDistance(fingerData[0].start, fingerData[1].start)), (options.swipeStatus || options.pinchStatus) && (ret = triggerHandler(event, phase))) : ret = !1, ret === !1 ? (phase = PHASE_CANCEL, triggerHandler(event, phase), ret) : (options.hold && (holdTimeout = setTimeout($.proxy(function() {
+                        $element.trigger("hold", [event.target]), options.hold && (ret = options.hold.call($element, event, event.target))
+                    }, this), options.longTapThreshold)), setTouchInProgress(!0), null)
+                }
+            }
+        }
+
+        function touchMove(jqEvent) {
+            var event = jqEvent.originalEvent ? jqEvent.originalEvent : jqEvent;
+            if (phase !== PHASE_END && phase !== PHASE_CANCEL && !inMultiFingerRelease()) {
+                var ret, touches = event.touches,
+                    evt = touches ? touches[0] : event,
+                    currentFinger = updateFingerData(evt);
+                if (endTime = getTimeStamp(), touches && (fingerCount = touches.length), options.hold && clearTimeout(holdTimeout), phase = PHASE_MOVE, 2 == fingerCount && (0 == startTouchesDistance ? (createFingerData(1, touches[1]), startTouchesDistance = endTouchesDistance = calculateTouchesDistance(fingerData[0].start, fingerData[1].start)) : (updateFingerData(touches[1]), endTouchesDistance = calculateTouchesDistance(fingerData[0].end, fingerData[1].end), pinchDirection = calculatePinchDirection(fingerData[0].end, fingerData[1].end)), pinchZoom = calculatePinchZoom(startTouchesDistance, endTouchesDistance), pinchDistance = Math.abs(startTouchesDistance - endTouchesDistance)), fingerCount === options.fingers || options.fingers === ALL_FINGERS || !touches || hasPinches()) {
+                    if (direction = calculateDirection(currentFinger.start, currentFinger.end), currentDirection = calculateDirection(currentFinger.last, currentFinger.end), validateDefaultEvent(jqEvent, currentDirection), distance = calculateDistance(currentFinger.start, currentFinger.end), duration = calculateDuration(), setMaxDistance(direction, distance), ret = triggerHandler(event, phase), !options.triggerOnTouchEnd || options.triggerOnTouchLeave) {
+                        var inBounds = !0;
+                        if (options.triggerOnTouchLeave) {
+                            var bounds = getbounds(this);
+                            inBounds = isInBounds(currentFinger.end, bounds)
+                        }!options.triggerOnTouchEnd && inBounds ? phase = getNextPhase(PHASE_MOVE) : options.triggerOnTouchLeave && !inBounds && (phase = getNextPhase(PHASE_END)), phase != PHASE_CANCEL && phase != PHASE_END || triggerHandler(event, phase)
+                    }
+                } else phase = PHASE_CANCEL, triggerHandler(event, phase);
+                ret === !1 && (phase = PHASE_CANCEL, triggerHandler(event, phase))
+            }
+        }
+
+        function touchEnd(jqEvent) {
+            var event = jqEvent.originalEvent ? jqEvent.originalEvent : jqEvent,
+                touches = event.touches;
+            if (touches) {
+                if (touches.length && !inMultiFingerRelease()) return startMultiFingerRelease(event), !0;
+                if (touches.length && inMultiFingerRelease()) return !0
+            }
+            return inMultiFingerRelease() && (fingerCount = fingerCountAtRelease), endTime = getTimeStamp(), duration = calculateDuration(), didSwipeBackToCancel() || !validateSwipeDistance() ? (phase = PHASE_CANCEL, triggerHandler(event, phase)) : options.triggerOnTouchEnd || options.triggerOnTouchEnd === !1 && phase === PHASE_MOVE ? (options.preventDefaultEvents !== !1 && jqEvent.cancelable !== !1 && jqEvent.preventDefault(), phase = PHASE_END, triggerHandler(event, phase)) : !options.triggerOnTouchEnd && hasTap() ? (phase = PHASE_END, triggerHandlerForGesture(event, phase, TAP)) : phase === PHASE_MOVE && (phase = PHASE_CANCEL, triggerHandler(event, phase)), setTouchInProgress(!1), null
+        }
+
+        function touchCancel() {
+            fingerCount = 0, endTime = 0, startTime = 0, startTouchesDistance = 0, endTouchesDistance = 0, pinchZoom = 1, cancelMultiFingerRelease(), setTouchInProgress(!1)
+        }
+
+        function touchLeave(jqEvent) {
+            var event = jqEvent.originalEvent ? jqEvent.originalEvent : jqEvent;
+            options.triggerOnTouchLeave && (phase = getNextPhase(PHASE_END), triggerHandler(event, phase))
+        }
+
+        function removeListeners() {
+            $element.unbind(START_EV, touchStart), $element.unbind(CANCEL_EV, touchCancel), $element.unbind(MOVE_EV, touchMove), $element.unbind(END_EV, touchEnd), LEAVE_EV && $element.unbind(LEAVE_EV, touchLeave), setTouchInProgress(!1)
+        }
+
+        function getNextPhase(currentPhase) {
+            var nextPhase = currentPhase,
+                validTime = validateSwipeTime(),
+                validDistance = validateSwipeDistance(),
+                didCancel = didSwipeBackToCancel();
+            return !validTime || didCancel ? nextPhase = PHASE_CANCEL : !validDistance || currentPhase != PHASE_MOVE || options.triggerOnTouchEnd && !options.triggerOnTouchLeave ? !validDistance && currentPhase == PHASE_END && options.triggerOnTouchLeave && (nextPhase = PHASE_CANCEL) : nextPhase = PHASE_END, nextPhase
+        }
+
+        function triggerHandler(event, phase) {
+            var ret, touches = event.touches;
+            return (didSwipe() || hasSwipes()) && (ret = triggerHandlerForGesture(event, phase, SWIPE)), (didPinch() || hasPinches()) && ret !== !1 && (ret = triggerHandlerForGesture(event, phase, PINCH)), didDoubleTap() && ret !== !1 ? ret = triggerHandlerForGesture(event, phase, DOUBLE_TAP) : didLongTap() && ret !== !1 ? ret = triggerHandlerForGesture(event, phase, LONG_TAP) : didTap() && ret !== !1 && (ret = triggerHandlerForGesture(event, phase, TAP)), phase === PHASE_CANCEL && touchCancel(event), phase === PHASE_END && (touches ? touches.length || touchCancel(event) : touchCancel(event)), ret
+        }
+
+        function triggerHandlerForGesture(event, phase, gesture) {
+            var ret;
+            if (gesture == SWIPE) {
+                if ($element.trigger("swipeStatus", [phase, direction || null, distance || 0, duration || 0, fingerCount, fingerData, currentDirection]), options.swipeStatus && (ret = options.swipeStatus.call($element, event, phase, direction || null, distance || 0, duration || 0, fingerCount, fingerData, currentDirection), ret === !1)) return !1;
+                if (phase == PHASE_END && validateSwipe()) {
+                    if (clearTimeout(singleTapTimeout), clearTimeout(holdTimeout), $element.trigger("swipe", [direction, distance, duration, fingerCount, fingerData, currentDirection]), options.swipe && (ret = options.swipe.call($element, event, direction, distance, duration, fingerCount, fingerData, currentDirection), ret === !1)) return !1;
+                    switch (direction) {
+                        case LEFT:
+                            $element.trigger("swipeLeft", [direction, distance, duration, fingerCount, fingerData, currentDirection]), options.swipeLeft && (ret = options.swipeLeft.call($element, event, direction, distance, duration, fingerCount, fingerData, currentDirection));
+                            break;
+                        case RIGHT:
+                            $element.trigger("swipeRight", [direction, distance, duration, fingerCount, fingerData, currentDirection]), options.swipeRight && (ret = options.swipeRight.call($element, event, direction, distance, duration, fingerCount, fingerData, currentDirection));
+                            break;
+                        case UP:
+                            $element.trigger("swipeUp", [direction, distance, duration, fingerCount, fingerData, currentDirection]), options.swipeUp && (ret = options.swipeUp.call($element, event, direction, distance, duration, fingerCount, fingerData, currentDirection));
+                            break;
+                        case DOWN:
+                            $element.trigger("swipeDown", [direction, distance, duration, fingerCount, fingerData, currentDirection]), options.swipeDown && (ret = options.swipeDown.call($element, event, direction, distance, duration, fingerCount, fingerData, currentDirection))
+                    }
+                }
+            }
+            if (gesture == PINCH) {
+                if ($element.trigger("pinchStatus", [phase, pinchDirection || null, pinchDistance || 0, duration || 0, fingerCount, pinchZoom, fingerData]), options.pinchStatus && (ret = options.pinchStatus.call($element, event, phase, pinchDirection || null, pinchDistance || 0, duration || 0, fingerCount, pinchZoom, fingerData), ret === !1)) return !1;
+                if (phase == PHASE_END && validatePinch()) switch (pinchDirection) {
+                    case IN:
+                        $element.trigger("pinchIn", [pinchDirection || null, pinchDistance || 0, duration || 0, fingerCount, pinchZoom, fingerData]), options.pinchIn && (ret = options.pinchIn.call($element, event, pinchDirection || null, pinchDistance || 0, duration || 0, fingerCount, pinchZoom, fingerData));
+                        break;
+                    case OUT:
+                        $element.trigger("pinchOut", [pinchDirection || null, pinchDistance || 0, duration || 0, fingerCount, pinchZoom, fingerData]), options.pinchOut && (ret = options.pinchOut.call($element, event, pinchDirection || null, pinchDistance || 0, duration || 0, fingerCount, pinchZoom, fingerData))
+                }
+            }
+            return gesture == TAP ? phase !== PHASE_CANCEL && phase !== PHASE_END || (clearTimeout(singleTapTimeout), clearTimeout(holdTimeout), hasDoubleTap() && !inDoubleTap() ? (doubleTapStartTime = getTimeStamp(), singleTapTimeout = setTimeout($.proxy(function() {
+                doubleTapStartTime = null, $element.trigger("tap", [event.target]), options.tap && (ret = options.tap.call($element, event, event.target))
+            }, this), options.doubleTapThreshold)) : (doubleTapStartTime = null, $element.trigger("tap", [event.target]), options.tap && (ret = options.tap.call($element, event, event.target)))) : gesture == DOUBLE_TAP ? phase !== PHASE_CANCEL && phase !== PHASE_END || (clearTimeout(singleTapTimeout), clearTimeout(holdTimeout), doubleTapStartTime = null, $element.trigger("doubletap", [event.target]), options.doubleTap && (ret = options.doubleTap.call($element, event, event.target))) : gesture == LONG_TAP && (phase !== PHASE_CANCEL && phase !== PHASE_END || (clearTimeout(singleTapTimeout), doubleTapStartTime = null, $element.trigger("longtap", [event.target]), options.longTap && (ret = options.longTap.call($element, event, event.target)))), ret
+        }
+
+        function validateSwipeDistance() {
+            var valid = !0;
+            return null !== options.threshold && (valid = distance >= options.threshold), valid
+        }
+
+        function didSwipeBackToCancel() {
+            var cancelled = !1;
+            return null !== options.cancelThreshold && null !== direction && (cancelled = getMaxDistance(direction) - distance >= options.cancelThreshold), cancelled
+        }
+
+        function validatePinchDistance() {
+            return null === options.pinchThreshold || pinchDistance >= options.pinchThreshold
+        }
+
+        function validateSwipeTime() {
+            var result;
+            return result = !options.maxTimeThreshold || !(duration >= options.maxTimeThreshold)
+        }
+
+        function validateDefaultEvent(jqEvent, direction) {
+            if (options.preventDefaultEvents !== !1)
+                if (options.allowPageScroll === NONE) jqEvent.preventDefault();
+                else {
+                    var auto = options.allowPageScroll === AUTO;
+                    switch (direction) {
+                        case LEFT:
+                            (options.swipeLeft && auto || !auto && options.allowPageScroll != HORIZONTAL) && jqEvent.preventDefault();
+                            break;
+                        case RIGHT:
+                            (options.swipeRight && auto || !auto && options.allowPageScroll != HORIZONTAL) && jqEvent.preventDefault();
+                            break;
+                        case UP:
+                            (options.swipeUp && auto || !auto && options.allowPageScroll != VERTICAL) && jqEvent.preventDefault();
+                            break;
+                        case DOWN:
+                            (options.swipeDown && auto || !auto && options.allowPageScroll != VERTICAL) && jqEvent.preventDefault();
+                            break;
+                        case NONE:
+                    }
+                }
+        }
+
+        function validatePinch() {
+            var hasCorrectFingerCount = validateFingers(),
+                hasEndPoint = validateEndPoint(),
+                hasCorrectDistance = validatePinchDistance();
+            return hasCorrectFingerCount && hasEndPoint && hasCorrectDistance
+        }
+
+        function hasPinches() {
+            return !!(options.pinchStatus || options.pinchIn || options.pinchOut)
+        }
+
+        function didPinch() {
+            return !(!validatePinch() || !hasPinches())
+        }
+
+        function validateSwipe() {
+            var hasValidTime = validateSwipeTime(),
+                hasValidDistance = validateSwipeDistance(),
+                hasCorrectFingerCount = validateFingers(),
+                hasEndPoint = validateEndPoint(),
+                didCancel = didSwipeBackToCancel(),
+                valid = !didCancel && hasEndPoint && hasCorrectFingerCount && hasValidDistance && hasValidTime;
+            return valid
+        }
+
+        function hasSwipes() {
+            return !!(options.swipe || options.swipeStatus || options.swipeLeft || options.swipeRight || options.swipeUp || options.swipeDown)
+        }
+
+        function didSwipe() {
+            return !(!validateSwipe() || !hasSwipes())
+        }
+
+        function validateFingers() {
+            return fingerCount === options.fingers || options.fingers === ALL_FINGERS || !SUPPORTS_TOUCH
+        }
+
+        function validateEndPoint() {
+            return 0 !== fingerData[0].end.x
+        }
+
+        function hasTap() {
+            return !!options.tap
+        }
+
+        function hasDoubleTap() {
+            return !!options.doubleTap
+        }
+
+        function hasLongTap() {
+            return !!options.longTap
+        }
+
+        function validateDoubleTap() {
+            if (null == doubleTapStartTime) return !1;
+            var now = getTimeStamp();
+            return hasDoubleTap() && now - doubleTapStartTime <= options.doubleTapThreshold
+        }
+
+        function inDoubleTap() {
+            return validateDoubleTap()
+        }
+
+        function validateTap() {
+            return (1 === fingerCount || !SUPPORTS_TOUCH) && (isNaN(distance) || distance < options.threshold)
+        }
+
+        function validateLongTap() {
+            return duration > options.longTapThreshold && distance < DOUBLE_TAP_THRESHOLD
+        }
+
+        function didTap() {
+            return !(!validateTap() || !hasTap())
+        }
+
+        function didDoubleTap() {
+            return !(!validateDoubleTap() || !hasDoubleTap())
+        }
+
+        function didLongTap() {
+            return !(!validateLongTap() || !hasLongTap())
+        }
+
+        function startMultiFingerRelease(event) {
+            previousTouchEndTime = getTimeStamp(), fingerCountAtRelease = event.touches.length + 1
+        }
+
+        function cancelMultiFingerRelease() {
+            previousTouchEndTime = 0, fingerCountAtRelease = 0
+        }
+
+        function inMultiFingerRelease() {
+            var withinThreshold = !1;
+            if (previousTouchEndTime) {
+                var diff = getTimeStamp() - previousTouchEndTime;
+                diff <= options.fingerReleaseThreshold && (withinThreshold = !0)
+            }
+            return withinThreshold
+        }
+
+        function getTouchInProgress() {
+            return !($element.data(PLUGIN_NS + "_intouch") !== !0)
+        }
+
+        function setTouchInProgress(val) {
+            $element && (val === !0 ? ($element.bind(MOVE_EV, touchMove), $element.bind(END_EV, touchEnd), LEAVE_EV && $element.bind(LEAVE_EV, touchLeave)) : ($element.unbind(MOVE_EV, touchMove, !1), $element.unbind(END_EV, touchEnd, !1), LEAVE_EV && $element.unbind(LEAVE_EV, touchLeave, !1)), $element.data(PLUGIN_NS + "_intouch", val === !0))
+        }
+
+        function createFingerData(id, evt) {
+            var f = {
+                start: {
+                    x: 0,
+                    y: 0
+                },
+                last: {
+                    x: 0,
+                    y: 0
+                },
+                end: {
+                    x: 0,
+                    y: 0
+                }
+            };
+            return f.start.x = f.last.x = f.end.x = evt.pageX || evt.clientX, f.start.y = f.last.y = f.end.y = evt.pageY || evt.clientY, fingerData[id] = f, f
+        }
+
+        function updateFingerData(evt) {
+            var id = void 0 !== evt.identifier ? evt.identifier : 0,
+                f = getFingerData(id);
+            return null === f && (f = createFingerData(id, evt)), f.last.x = f.end.x, f.last.y = f.end.y, f.end.x = evt.pageX || evt.clientX, f.end.y = evt.pageY || evt.clientY, f
+        }
+
+        function getFingerData(id) {
+            return fingerData[id] || null
+        }
+
+        function setMaxDistance(direction, distance) {
+            direction != NONE && (distance = Math.max(distance, getMaxDistance(direction)), maximumsMap[direction].distance = distance)
+        }
+
+        function getMaxDistance(direction) {
+            if (maximumsMap[direction]) return maximumsMap[direction].distance
+        }
+
+        function createMaximumsData() {
+            var maxData = {};
+            return maxData[LEFT] = createMaximumVO(LEFT), maxData[RIGHT] = createMaximumVO(RIGHT), maxData[UP] = createMaximumVO(UP), maxData[DOWN] = createMaximumVO(DOWN), maxData
+        }
+
+        function createMaximumVO(dir) {
+            return {
+                direction: dir,
+                distance: 0
+            }
+        }
+
+        function calculateDuration() {
+            return endTime - startTime
+        }
+
+        function calculateTouchesDistance(startPoint, endPoint) {
+            var diffX = Math.abs(startPoint.x - endPoint.x),
+                diffY = Math.abs(startPoint.y - endPoint.y);
+            return Math.round(Math.sqrt(diffX * diffX + diffY * diffY))
+        }
+
+        function calculatePinchZoom(startDistance, endDistance) {
+            var percent = endDistance / startDistance * 1;
+            return percent.toFixed(2)
+        }
+
+        function calculatePinchDirection() {
+            return pinchZoom < 1 ? OUT : IN
+        }
+
+        function calculateDistance(startPoint, endPoint) {
+            return Math.round(Math.sqrt(Math.pow(endPoint.x - startPoint.x, 2) + Math.pow(endPoint.y - startPoint.y, 2)))
+        }
+
+        function calculateAngle(startPoint, endPoint) {
+            var x = startPoint.x - endPoint.x,
+                y = endPoint.y - startPoint.y,
+                r = Math.atan2(y, x),
+                angle = Math.round(180 * r / Math.PI);
+            return angle < 0 && (angle = 360 - Math.abs(angle)), angle
+        }
+
+        function calculateDirection(startPoint, endPoint) {
+            if (comparePoints(startPoint, endPoint)) return NONE;
+            var angle = calculateAngle(startPoint, endPoint);
+            return angle <= 45 && angle >= 0 ? LEFT : angle <= 360 && angle >= 315 ? LEFT : angle >= 135 && angle <= 225 ? RIGHT : angle > 45 && angle < 135 ? DOWN : UP
+        }
+
+        function getTimeStamp() {
+            var now = new Date;
+            return now.getTime()
+        }
+
+        function getbounds(el) {
+            el = $(el);
+            var offset = el.offset(),
+                bounds = {
+                    left: offset.left,
+                    right: offset.left + el.outerWidth(),
+                    top: offset.top,
+                    bottom: offset.top + el.outerHeight()
+                };
+            return bounds
+        }
+
+        function isInBounds(point, bounds) {
+            return point.x > bounds.left && point.x < bounds.right && point.y > bounds.top && point.y < bounds.bottom
+        }
+
+        function comparePoints(pointA, pointB) {
+            return pointA.x == pointB.x && pointA.y == pointB.y
+        }
+        var options = $.extend({}, options),
+            useTouchEvents = SUPPORTS_TOUCH || SUPPORTS_POINTER || !options.fallbackToMouseEvents,
+            START_EV = useTouchEvents ? SUPPORTS_POINTER ? SUPPORTS_POINTER_IE10 ? "MSPointerDown" : "pointerdown" : "touchstart" : "mousedown",
+            MOVE_EV = useTouchEvents ? SUPPORTS_POINTER ? SUPPORTS_POINTER_IE10 ? "MSPointerMove" : "pointermove" : "touchmove" : "mousemove",
+            END_EV = useTouchEvents ? SUPPORTS_POINTER ? SUPPORTS_POINTER_IE10 ? "MSPointerUp" : "pointerup" : "touchend" : "mouseup",
+            LEAVE_EV = useTouchEvents ? SUPPORTS_POINTER ? "mouseleave" : null : "mouseleave",
+            CANCEL_EV = SUPPORTS_POINTER ? SUPPORTS_POINTER_IE10 ? "MSPointerCancel" : "pointercancel" : "touchcancel",
+            distance = 0,
+            direction = null,
+            currentDirection = null,
+            duration = 0,
+            startTouchesDistance = 0,
+            endTouchesDistance = 0,
+            pinchZoom = 1,
+            pinchDistance = 0,
+            pinchDirection = 0,
+            maximumsMap = null,
+            $element = $(element),
+            phase = "start",
+            fingerCount = 0,
+            fingerData = {},
+            startTime = 0,
+            endTime = 0,
+            previousTouchEndTime = 0,
+            fingerCountAtRelease = 0,
+            doubleTapStartTime = 0,
+            singleTapTimeout = null,
+            holdTimeout = null;
+        try {
+            $element.bind(START_EV, touchStart), $element.bind(CANCEL_EV, touchCancel)
+        } catch (e) {
+            $.error("events not supported " + START_EV + "," + CANCEL_EV + " on jQuery.swipe")
+        }
+        this.enable = function() {
+            return this.disable(), $element.bind(START_EV, touchStart), $element.bind(CANCEL_EV, touchCancel), $element
+        }, this.disable = function() {
+            return removeListeners(), $element
+        }, this.destroy = function() {
+            removeListeners(), $element.data(PLUGIN_NS, null), $element = null
+        }, this.option = function(property, value) {
+            if ("object" == typeof property) options = $.extend(options, property);
+            else if (void 0 !== options[property]) {
+                if (void 0 === value) return options[property];
+                options[property] = value
+            } else {
+                if (!property) return options;
+                $.error("Option " + property + " does not exist on jQuery.swipe.options")
+            }
+            return null
+        }
+    }
+    var VERSION = "1.6.18",
+        LEFT = "left",
+        RIGHT = "right",
+        UP = "up",
+        DOWN = "down",
+        IN = "in",
+        OUT = "out",
+        NONE = "none",
+        AUTO = "auto",
+        SWIPE = "swipe",
+        PINCH = "pinch",
+        TAP = "tap",
+        DOUBLE_TAP = "doubletap",
+        LONG_TAP = "longtap",
+        HORIZONTAL = "horizontal",
+        VERTICAL = "vertical",
+        ALL_FINGERS = "all",
+        DOUBLE_TAP_THRESHOLD = 10,
+        PHASE_START = "start",
+        PHASE_MOVE = "move",
+        PHASE_END = "end",
+        PHASE_CANCEL = "cancel",
+        SUPPORTS_TOUCH = "ontouchstart" in window,
+        SUPPORTS_POINTER_IE10 = window.navigator.msPointerEnabled && !window.navigator.pointerEnabled && !SUPPORTS_TOUCH,
+        SUPPORTS_POINTER = (window.navigator.pointerEnabled || window.navigator.msPointerEnabled) && !SUPPORTS_TOUCH,
+        PLUGIN_NS = "TouchSwipe",
+        defaults = {
+            fingers: 1,
+            threshold: 75,
+            cancelThreshold: null,
+            pinchThreshold: 20,
+            maxTimeThreshold: null,
+            fingerReleaseThreshold: 250,
+            longTapThreshold: 500,
+            doubleTapThreshold: 200,
+            swipe: null,
+            swipeLeft: null,
+            swipeRight: null,
+            swipeUp: null,
+            swipeDown: null,
+            swipeStatus: null,
+            pinchIn: null,
+            pinchOut: null,
+            pinchStatus: null,
+            click: null,
+            tap: null,
+            doubleTap: null,
+            longTap: null,
+            hold: null,
+            triggerOnTouchEnd: !0,
+            triggerOnTouchLeave: !1,
+            allowPageScroll: "auto",
+            fallbackToMouseEvents: !0,
+            excludedElements: ".noSwipe",
+            preventDefaultEvents: !0
+        };
+    $.fn.swipe = function(method) {
+        var $this = $(this),
+            plugin = $this.data(PLUGIN_NS);
+        if (plugin && "string" == typeof method) {
+            if (plugin[method]) return plugin[method].apply(plugin, Array.prototype.slice.call(arguments, 1));
+            $.error("Method " + method + " does not exist on jQuery.swipe")
+        } else if (plugin && "object" == typeof method) plugin.option.apply(plugin, arguments);
+        else if (!(plugin || "object" != typeof method && method)) return init.apply(this, arguments);
+        return $this
+    }, $.fn.swipe.version = VERSION, $.fn.swipe.defaults = defaults, $.fn.swipe.phases = {
+        PHASE_START: PHASE_START,
+        PHASE_MOVE: PHASE_MOVE,
+        PHASE_END: PHASE_END,
+        PHASE_CANCEL: PHASE_CANCEL
+    }, $.fn.swipe.directions = {
+        LEFT: LEFT,
+        RIGHT: RIGHT,
+        UP: UP,
+        DOWN: DOWN,
+        IN: IN,
+        OUT: OUT
+    }, $.fn.swipe.pageScroll = {
+        NONE: NONE,
+        HORIZONTAL: HORIZONTAL,
+        VERTICAL: VERTICAL,
+        AUTO: AUTO
+    }, $.fn.swipe.fingers = {
+        ONE: 1,
+        TWO: 2,
+        THREE: 3,
+        FOUR: 4,
+        FIVE: 5,
+        ALL: ALL_FINGERS
+    }
+});
