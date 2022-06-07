@@ -66,7 +66,7 @@ function scrollToTarget(t) {
 
 function animateWhenVisible() {
     hideAll(), inViewCheck(), $(window).scroll(function() {
-        inViewCheck(), scrollToTopView(), stickyNavToggle()
+        inViewCheck(), stickyNavToggle()
     })
 }
 
@@ -108,9 +108,7 @@ function inViewCheck() {
     })
 }
 
-function scrollToTopView() {
-    $(window).scrollTop() > $(window).height() / 3 ? $(".scrollToTop").hasClass("showScrollTop") || $(".scrollToTop").addClass("showScrollTop") : $(".scrollToTop").removeClass("showScrollTop")
-}
+
 
 function setUpVisibilityToggle() {
     $(document).on("click", "[data-toggle-visibility]", function(t) {
